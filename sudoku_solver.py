@@ -3,33 +3,28 @@
 import sys
 import copy
 
+def check_unique(l):
+    trimmed = [i for i in l if i != 0]
+    return len(trimmed) == len(set(trimmed))
+
 def check_box(c, xs, ys):
-    seen = set()
+    l = []
     for x in range(xs, xs+3):
         for y in range(ys, ys+3):
-            if c[y][x] in seen:
-                return False
-            if not c[y][x] == 0:
-                seen.add(c[y][x])
-    return True
+            l.append(c[y][x])
+    return check_unique(l)
 
 def check_row(c, y):
-    seen = set()
+    l = []
     for x in range(9):
-        if c[y][x] in seen:
-            return False
-        if not c[y][x] == 0:
-            seen.add(c[y][x])
-    return True
+        l.append(c[y][x])
+    return check_unique(l)
 
 def check_col(c, x):
-    seen = set()
+    l = []
     for y in range(9):
-        if c[y][x] in seen:
-            return False
-        if not c[y][x] == 0:
-            seen.add(c[y][x])
-    return True
+        l.append(c[y][x])
+    return check_unique(l)
 
 def reject(c):
     for i in range(9):
